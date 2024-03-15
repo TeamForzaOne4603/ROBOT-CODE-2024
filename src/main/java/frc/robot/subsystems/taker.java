@@ -14,7 +14,7 @@ public class taker extends SubsystemBase {
 
   CANSparkMax intakeMotor = new CANSparkMax(8, MotorType.kBrushless);
   public taker() {
-    intakeMotor.setSmartCurrentLimit(40);
+  intakeMotor.setSmartCurrentLimit(40);
   }
 
   @Override

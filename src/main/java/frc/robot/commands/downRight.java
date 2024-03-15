@@ -25,7 +25,7 @@ public class downRight extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climberRight.rightMove(.1);
+    climberRight.rightMove(.31);
   }
 
   // Called once the command ends or is interrupted.

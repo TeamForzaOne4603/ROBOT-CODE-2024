@@ -47,4 +47,8 @@ public final class Constants {
     public static final double sVelocity = -.1;
   }
 
+  public static class velocity {
+    
+  }
+
   }

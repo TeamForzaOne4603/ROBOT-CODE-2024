@@ -24,7 +24,7 @@ public class climbLeft extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climberLeft.leftMove(.1);
+    climberLeft.leftMove(.31);
   }
 
   // Called once the command ends or is interrupted.

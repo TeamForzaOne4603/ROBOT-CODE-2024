@@ -6,36 +6,37 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.climberRight;
+import frc.robot.subsystems.taker;
 
-public class climbRight extends Command {
-  /** Creates a new climbRight. */
+public class shootaIntake extends Command {
+  /** Creates a new shootaIntake. */
   Timer timer = new Timer();
-  climberRight climberRight;
-  
-  public climbRight(climberRight climberRight) {
+  taker taker;
+  public shootaIntake(taker taker) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.climberRight = climberRight;
-      addRequirements(climberRight);
-    }
-  
+    this.taker = taker;
+    addRequirements(taker);
+  }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climberRight.rightMove(-.31);
+    if(timer.get() > 1.2){
+      taker.take(-1);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climberRight.rightStop();
+    taker.stop();
   }
 
   // Returns true when the command should end.

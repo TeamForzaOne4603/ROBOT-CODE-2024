@@ -9,13 +9,15 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class climberRight extends SubsystemBase {
-  CANSparkMax rightMotor = new CANSparkMax(11, MotorType.kBrushless);
-  
-  public climberRight() {
+public class shooter extends SubsystemBase {
+   CANSparkMax leftMotor = new CANSparkMax(10, MotorType.kBrushless);
+   CANSparkMax rightMotor = new CANSparkMax(9, MotorType.kBrushless);
+  public shooter() {
+    leftMotor.setSmartCurrentLimit(40);
     rightMotor.setSmartCurrentLimit(40);
 
     rightMotor.setInverted(false);
+    leftMotor.follow(rightMotor, true);
   }
 
   @Override
@@ -23,11 +25,11 @@ public class climberRight extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void rightMove(double speed){
+  public void shooterMove(double speed){
     rightMotor.set(speed);
   }
 
-  public void rightStop(){
+  public void stop(){
     rightMotor.stopMotor();
   }
 }
