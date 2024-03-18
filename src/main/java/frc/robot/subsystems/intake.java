@@ -67,8 +67,8 @@ public class intake extends ProfiledPIDSubsystem {
     intakeLeft.setIdleMode(IdleMode.kCoast);
     intakeRight.setIdleMode(IdleMode.kCoast);
 
-    leftEncoder.setPosition((-dutyEncoder.get()  ) / armConstants.FACTOR_CONVERSION);
-    rightEncoder.setPosition((-dutyEncoder.get() ) / armConstants.FACTOR_CONVERSION);
+    leftEncoder.setPosition((-dutyEncoder.get()  ) / armConstants.FACTOR_CONVERSION_INTAKE);
+    rightEncoder.setPosition((-dutyEncoder.get() ) / armConstants.FACTOR_CONVERSION_INTAKE);
 
     leftController = intakeLeft.getPIDController();
     rightController = intakeRight.getPIDController();
@@ -94,8 +94,8 @@ public class intake extends ProfiledPIDSubsystem {
     // This method will be called once per scheduler run
     super.periodic();
     SmartDashboard.putNumber("el angulo actual es", getMeasurement());
-    SmartDashboard.putNumber("angulo izquierdo", leftEncoder.getPosition() * armConstants.FACTOR_CONVERSION);
-    SmartDashboard.putNumber("angulo derecho", rightEncoder.getPosition() * armConstants.FACTOR_CONVERSION);
+    SmartDashboard.putNumber("angulo izquierdo", leftEncoder.getPosition() * armConstants.FACTOR_CONVERSION_INTAKE);
+    SmartDashboard.putNumber("angulo derecho", rightEncoder.getPosition() * armConstants.FACTOR_CONVERSION_INTAKE);
 
     double kP = 0, kFF = 0, kI = 0, kD = 0;
     double p = SmartDashboard.getNumber("kP Brazo", 0);
@@ -118,8 +118,6 @@ public class intake extends ProfiledPIDSubsystem {
 
   }
 
-
-
   @Override
   public double getMeasurement() {
     return dutyEncoder.getDistance();
@@ -136,9 +134,8 @@ public class intake extends ProfiledPIDSubsystem {
   }
 
   public void goToPosition(double position){
-    leftController.setReference(position / armConstants.FACTOR_CONVERSION, ControlType.kPosition);
-    rightController.setReference(position / armConstants.FACTOR_CONVERSION, ControlType.kPosition);
-    
+    leftController.setReference(position / armConstants.FACTOR_CONVERSION_INTAKE, ControlType.kPosition);
+    rightController.setReference(position / armConstants.FACTOR_CONVERSION_INTAKE, ControlType.kPosition);
   }
 
   public Command goToPositionIntake(double position){
@@ -147,30 +144,5 @@ public class intake extends ProfiledPIDSubsystem {
         this.goToPosition(position);
       }, this);
       return ejecutable;
-  }
-
-
-  public boolean IntakePosition(){
-    if(this.getController().getGoal().position == armConstants.INTAKE_POSITION){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  public boolean AmpPosition(){
-    if(this.getController().getGoal().position == armConstants.AMP_POSITION){
-    return true;
-  }else{
-    return false;
-  }
-  }
-
-  public boolean ShooterPosition(){
-    if(this.getController().getGoal().position == armConstants.SHOOTER_POSITION){
-      return true;
-    }else{
-      return false;
-    }
   }
 }

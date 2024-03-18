@@ -27,7 +27,7 @@ public class arcadeDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrainSubsystem.arcadeDrive(joy.getLeftY() * -1, joy.getLeftX() * -1);
+    drivetrainSubsystem.arcadeDrive(joy.getLeftY() * -1, joy.getRightX() * -1);
   }
 
   // Called once the command ends or is interrupted.

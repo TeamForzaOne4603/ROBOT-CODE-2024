@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoSink;
+import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -19,6 +23,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  UsbCamera camera1;
+  VideoSink server;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -28,6 +35,11 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera1.setResolution(1, 3);
+    camera1.setFPS(60);
+     server = CameraServer.getServer();
+     camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
   }
 
   /**

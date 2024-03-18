@@ -28,7 +28,7 @@ public class shootaIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get() > 1.2){
+    if(timer.get() > .7){
       taker.take(-1);
     }
   }

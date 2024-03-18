@@ -26,9 +26,9 @@ public class shoot extends Command {
   }
   @Override
   public void execute() {
-    shooter.shooterMove(.85);
-    if(timer.get() > 2.4){
-      taker.take(-.8);
+    shooter.shooterMove(1);
+    if(timer.get() > 1.6){
+      taker.take(-1);
     }
     
   }

@@ -26,21 +26,12 @@ public class drivetrain extends SubsystemBase {
   PIDController PID = new PIDController(0, 0, 0);
 
   DifferentialDrive drive = new DifferentialDrive(leftLeader, rightLeader);
-  /*     (double output) -> {
-      leftLeader.set(output);
-      leftFollower.set(output);
-  },
-  (double output) -> {
-      rightLeader.set(output);
-      rightFollower.set(output);
-  });*/
   
-
   public drivetrain() {
-    leftLeader.setSmartCurrentLimit(35);
-    rightLeader.setSmartCurrentLimit(35);
-    leftFollower.setSmartCurrentLimit(35);
-    rightFollower.setSmartCurrentLimit(35);
+    leftLeader.setSmartCurrentLimit(40);
+    rightLeader.setSmartCurrentLimit(40);
+    leftFollower.setSmartCurrentLimit(40); 
+    rightFollower.setSmartCurrentLimit(40);
 
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
@@ -61,9 +52,5 @@ public class drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("voltaje adelante", leftLeader.getBusVoltage());
-    SmartDashboard.putNumber("voltaje detras", leftFollower.getBusVoltage());
-    SmartDashboard.putNumber("corriente adelante", leftFollower.getOutputCurrent());
-    SmartDashboard.putNumber("corriente detras", leftFollower.getOutputCurrent());
   }
 }

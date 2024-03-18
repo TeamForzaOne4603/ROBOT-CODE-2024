@@ -39,7 +39,7 @@ public final class Constants {
     public static final double AMP_POSITION = 0;               
     public static final double INTAKE_POSITION = 0;
 
-    public static final double FACTOR_CONVERSION = 4.809105190124189;
+    public static final double FACTOR_CONVERSION_INTAKE = 4.809105190124189;
 
     public static final double OFFSET = 164;
     
@@ -47,8 +47,14 @@ public final class Constants {
     public static final double sVelocity = -.1;
   }
 
-  public static class velocity {
-    
+  public static class climber {
+    public static final double FACTOR_CONVERSION_CLIMBER = 1 / 36;
+
+    public static final double kP = 0.015,
+                               kI = 0,
+                               kD = 0.01,
+                               kFF = .0036;
   }
+  
 
   }
