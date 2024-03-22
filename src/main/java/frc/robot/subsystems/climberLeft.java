@@ -70,6 +70,6 @@ public class climberLeft extends SubsystemBase {
       return ejecutable;
   }
   public void resetEncoder(){
-    leftEncoder.setPosition(8);
+    leftEncoder.setPosition(0.75);
   }
 }

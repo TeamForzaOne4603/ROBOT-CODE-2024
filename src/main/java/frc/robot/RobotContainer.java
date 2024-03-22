@@ -6,18 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.ampShooter;
 import frc.robot.commands.arcadeDrive;
-import frc.robot.commands.climbLeft;
-import frc.robot.commands.climbRight;
-import frc.robot.commands.downLeft;
-import frc.robot.commands.downRight;
 import frc.robot.commands.shoot;
 import frc.robot.commands.shootaIntake;
 import frc.robot.commands.take;
 import frc.robot.commands.wheels;
-import frc.robot.commands.Auto.auto;
+import frc.robot.commands.Auto.auto_front;
 import frc.robot.subsystems.climberLeft;
 import frc.robot.subsystems.climberRight;
 import frc.robot.subsystems.drivetrain;
@@ -44,7 +38,7 @@ public class RobotContainer {
   private shooter shooter = new shooter();
 
   private final arcadeDrive arcadeDriveC = new arcadeDrive(drivetrainS, joy_drive);
-  private final auto auto = new auto(shooter, taker, drivetrainS);
+  private final auto_front auto_front = new auto_front(shooter, taker, drivetrainS, intake);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -54,15 +48,7 @@ public class RobotContainer {
     configureBindings();
   }
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
+  
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
@@ -78,10 +64,10 @@ public class RobotContainer {
     .whileFalse(intake.goToPositionIntake(60));
     joy_system.a().whileTrue(new wheels(taker));
 
-    joy_drive.leftBumper().whileTrue(climberLeft.leftMove(146)).whileFalse(climberLeft.leftStop());
-    joy_drive.leftBumper().and(joy_drive.a()).whileTrue(climberLeft.leftMove(6)).whileFalse(climberLeft.leftStop());
-    joy_drive.rightBumper().whileTrue(climberRight.rightMove(146)).whileFalse(climberRight.rightStop());
-    joy_drive.rightBumper().and(joy_drive.a()).whileTrue(climberRight.rightMove(6)).whileFalse(climberRight.rightStop());
+    joy_drive.leftBumper().whileTrue(climberLeft.leftMove(170)).whileFalse(climberLeft.leftStop());
+    joy_drive.leftBumper().and(joy_drive.a()).whileTrue(climberLeft.leftMove(0)).whileFalse(climberLeft.leftStop());
+    joy_drive.rightBumper().whileTrue(climberRight.rightMove(170)).whileFalse(climberRight.rightStop());
+    joy_drive.rightBumper().and(joy_drive.a()).whileTrue(climberRight.rightMove(0)).whileFalse(climberRight.rightStop());
 
     //joy_drive.leftBumper().whileTrue(new climbLeft(climberLeft));
     //joy_drive.leftBumper().and(joy_drive.a()).whileTrue(new downLeft(climberLeft));
@@ -90,6 +76,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return auto;
+    return auto_front;
   }
 }

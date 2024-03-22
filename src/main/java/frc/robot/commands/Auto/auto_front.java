@@ -6,17 +6,20 @@ package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.arcadeDrive;
 import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.taker;
 
-public class auto extends Command {
+public class auto_front extends Command {
   /** Creates a new auto. */
   shooter shooter;
   taker taker;
   drivetrain drivetrain;
+  intake intake;
   Timer timer = new Timer();
-  public auto(shooter shooter, taker taker, drivetrain drivetrain) {
+  public auto_front(shooter shooter, taker taker, drivetrain drivetrain , intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrain = drivetrain;
     this.shooter = shooter;
@@ -42,7 +45,22 @@ public class auto extends Command {
     if(timer.get() > 5){
       shooter.shooterMove(0);
       taker.take(0);
+    } 
+    while(timer.get() > 5 & timer.get() < 8){
+      drivetrain.arcadeDrive(.5, 0);
     }
+    /*if (timer.get() > 5.5 & timer.get() < 7.5){
+      intake.goToPositionIntake(219); 
+    }
+    if(timer.get() > 6 & timer.get() < 8.5){
+      taker.take(.4);
+    }
+    if(timer.get() > 8.5 & timer.get() < 10){
+      intake.goToPositionIntake(0);
+    }
+    if(timer.get() > 9.3 & timer.get() < 13){
+      drivetrain.arcadeDrive(-.5, 0);
+    }*/
   }
 
   // Called once the command ends or is interrupted.
@@ -50,6 +68,7 @@ public class auto extends Command {
   public void end(boolean interrupted) {
     shooter.shooterMove(0);
       taker.take(0);
+      drivetrain.arcadeDrive(0, 0);
       timer.stop();
   }
 
