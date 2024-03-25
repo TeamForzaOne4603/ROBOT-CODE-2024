@@ -12,14 +12,14 @@ import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.taker;
 
-public class auto_front extends Command {
+public class speakerDobleC extends Command {
   /** Creates a new auto. */
   shooter shooter;
   taker taker;
   drivetrain drivetrain;
   intake intake;
   Timer timer = new Timer();
-  public auto_front(shooter shooter, taker taker, drivetrain drivetrain , intake intake) {
+  public speakerDobleC(shooter shooter, taker taker, drivetrain drivetrain , intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrain = drivetrain;
     this.shooter = shooter;
@@ -36,7 +36,34 @@ public class auto_front extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get() < 4){
+    /*while(timer.get() < 3){
+      shooter.shooterMove(.85);
+    }
+    while(timer.get() > 1.2 & timer.get() < 3){
+      taker.take(-.6);
+    }
+    while(timer.get() > 3.2 & timer.get() < 6){
+      drivetrain.feedForwardAuto(0);
+    }
+    while(timer.get() > 4.5 & timer.get() < 6){
+      intake.goToPositionIntake(219); 
+    }
+    while(timer.get() > 4.9 & timer.get() < 6.3){
+      taker.take(.4);
+    }
+    while(timer.get() > 6.5 & timer.get() < 8){
+      intake.goToPositionIntake(0);
+    }
+    while(timer.get() > 7 & timer.get() < 12){
+      drivetrain.feedForwardAuto(0);
+    }
+    while(timer.get() > 11.4 & timer.get() < 14){
+      shooter.shooterMove(.85);
+    }
+    while(timer.get() > 12 & timer.get() < 14){
+      taker.take(-.6);
+    }*/
+    /*if(timer.get() < 4){
       shooter.shooterMove(.85);
     }
     if(timer.get() > 2 & timer.get() < 4){
@@ -46,8 +73,29 @@ public class auto_front extends Command {
       shooter.shooterMove(0);
       taker.take(0);
     } 
-    while(timer.get() > 5 & timer.get() < 8){
+    while(timer.get() > 5 & timer.get() < 7){
       drivetrain.arcadeDrive(.5, 0);
+    }
+    while(timer.get() > 6 & timer.get() < 8){
+      intake.goToPositionIntake(219);
+    }
+    if(timer.get() > 7 & timer.get() < 8.5 ){
+    taker.take(.6);
+    }
+    while(timer.get() > 9 & timer.get() < 11){
+      drivetrain.arcadeDrive(-.5, 0);
+    }
+    while(timer.get() > 8.5 & timer.get() < 11){
+      intake.goToPositionIntake(0);
+    }
+    if(timer.get() > 11 &timer.get() < 14.5){
+      shooter.shooterMove(.85);
+    }
+    if(timer.get() > 12.5 & timer.get() < 14.5){
+      taker.take(-.6);
+    }*/
+    if(timer.get() < 5){
+      intake.goToPosition(219);
     }
   }
 

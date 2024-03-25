@@ -50,10 +50,20 @@ public final class Constants {
   public static class climber {
     public static final double FACTOR_CONVERSION_CLIMBER = 1 / 36;
 
-    public static final double kP = 0.015,
+    public static final double kP = 0.018,
                                kI = 0,
-                               kD = 0.01,
+                               kD = 0.015,
                                kFF = .0036;
+  }
+
+  public static class chassis {
+    public static final double kP = 0;
+    public static final double kI = 0;
+    public static final double kD = 0;
+    public static final double kFF = 0,
+                                vueltaPorVueltas = 6.56;
+
+    public static final double conversionFac = (1 / 8.45) / vueltaPorVueltas;
   }
   
 

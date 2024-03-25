@@ -6,22 +6,18 @@ package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.arcadeDrive;
-import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.taker;
 
-public class auto_front extends Command {
+public class speaker extends Command {
   /** Creates a new auto. */
   shooter shooter;
   taker taker;
-  drivetrain drivetrain;
   intake intake;
   Timer timer = new Timer();
-  public auto_front(shooter shooter, taker taker, drivetrain drivetrain , intake intake) {
+  public speaker(shooter shooter, taker taker, intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.drivetrain = drivetrain;
     this.shooter = shooter;
     this.taker = taker;
   }
@@ -46,9 +42,6 @@ public class auto_front extends Command {
       shooter.shooterMove(0);
       taker.take(0);
     } 
-    while(timer.get() > 5 & timer.get() < 8){
-      drivetrain.arcadeDrive(.5, 0);
-    }
   }
 
   // Called once the command ends or is interrupted.
@@ -56,7 +49,6 @@ public class auto_front extends Command {
   public void end(boolean interrupted) {
     shooter.shooterMove(0);
       taker.take(0);
-      drivetrain.arcadeDrive(0, 0);
       timer.stop();
   }
 

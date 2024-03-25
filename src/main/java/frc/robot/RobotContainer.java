@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.arcadeDrive;
@@ -12,6 +16,8 @@ import frc.robot.commands.shootaIntake;
 import frc.robot.commands.take;
 import frc.robot.commands.wheels;
 import frc.robot.commands.Auto.auto_front;
+import frc.robot.commands.Auto.speaker;
+import frc.robot.commands.Auto.speakerDobleC;
 import frc.robot.subsystems.climberLeft;
 import frc.robot.subsystems.climberRight;
 import frc.robot.subsystems.drivetrain;
@@ -19,14 +25,9 @@ import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.taker;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and trigger mappings) should be declared here.
- */
+
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
+  
   private final CommandXboxController joy_system = new CommandXboxController(0);
   private final CommandXboxController joy_drive = new CommandXboxController(1);
 
@@ -38,22 +39,37 @@ public class RobotContainer {
   private shooter shooter = new shooter();
 
   private final arcadeDrive arcadeDriveC = new arcadeDrive(drivetrainS, joy_drive);
-  private final auto_front auto_front = new auto_front(shooter, taker, drivetrainS, intake);
+  
+  private final SendableChooser<String> autoChooser = new SendableChooser<>();
+  private final String defaultAuto = "SPEAKER NOMAS";
+  private String autoSelected;
+  private final String[] autoNames = {
+    "NO AUTO", "SPEAKER AVANZA", "SPEAKER NOMAS", "DOBLE NOTA","DOBLE NOTA SPEAKER IZQ",
+    "DOBLE NOTA SPEAKER DER"};
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    autoChooser.setDefaultOption("speaker nomas", defaultAuto);
+    autoChooser.addOption("no auto", autoNames[0]);
+    autoChooser.addOption("speaker avanza", autoNames[1]);
+    autoChooser.addOption("Doble nota centro", autoNames[3]);
+
+    NamedCommands.registerCommand("intakeGoIntake", intake.goToPositionIntake(219));
+    NamedCommands.registerCommand("intakeGoShooter", intake.goToPositionIntake(0));
+    NamedCommands.registerCommand("take", new take(taker));
+    NamedCommands.registerCommand("shoot", new shoot(shooter, taker));
+
+    SmartDashboard.putData("seleccion de auto", autoChooser);
     configureBindings();
   }
 
   
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
     drivetrainS.setDefaultCommand(arcadeDriveC);
     
     joy_system.rightBumper().whileTrue(intake.goToPositionIntake(219).alongWith(new take(taker)))
@@ -76,6 +92,30 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return auto_front;
+    Command autonomusCommand = null;
+    autoSelected = autoChooser.getSelected();
+    System.out.println("auto selected: " + autoSelected);
+    switch (autoSelected) {
+      case "SPEAKER NOMAS":
+        autonomusCommand = new speaker(shooter, taker, intake);
+      break;
+      case "NO AUTO" :
+      autonomusCommand = null;
+      break;
+      case "SPEAKER AVANZA":
+      autonomusCommand = new auto_front(shooter, taker, drivetrainS, intake);
+      break;
+      case "DOBLE NOTA":
+      autonomusCommand = new speakerDobleC(shooter, taker, drivetrainS, intake);
+      break;
+     /*case "DOBLE NOTA SPEAKER IZQ":
+      autonomusCommand = new speakerDobleC(shooter, taker, drivetrainS, intake);
+      break;
+      case "DOBLE NOTA SPEAKER DER":
+      autonomusCommand = new speakerDobleC(shooter, taker, drivetrainS, intake);
+      break;*/ 
+    }
+    return autonomusCommand;
+
   }
 }
