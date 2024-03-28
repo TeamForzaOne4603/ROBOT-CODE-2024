@@ -60,10 +60,12 @@ public final class Constants {
     public static final double kP = 0;
     public static final double kI = 0;
     public static final double kD = 0;
-    public static final double kFF = 0,
-                                vueltaPorVueltas = 6.56;
+    public static final double kFF = 0;
+    public static final double kGearRatio = 8.46;
+    public static final double wheelDiameter = .1524;
 
-    public static final double conversionFac = (1 / 8.45) / vueltaPorVueltas;
+
+    public static final double conversionFac = (1 / 8.45);
   }
   
 

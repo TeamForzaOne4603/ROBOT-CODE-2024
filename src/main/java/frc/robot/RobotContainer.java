@@ -9,6 +9,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.arcadeDrive;
 import frc.robot.commands.shoot;
@@ -60,8 +61,11 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("intakeGoIntake", intake.goToPositionIntake(219));
     NamedCommands.registerCommand("intakeGoShooter", intake.goToPositionIntake(0));
+    NamedCommands.registerCommand("intakeNeutro", intake.goToPositionIntake(60));
     NamedCommands.registerCommand("take", new take(taker));
     NamedCommands.registerCommand("shoot", new shoot(shooter, taker));
+
+
 
     SmartDashboard.putData("seleccion de auto", autoChooser);
     configureBindings();

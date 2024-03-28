@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.318369960687468,
+      "y": 5.448775967973154
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "inicio"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Regreso Subwoffer"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nota 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2doRegreso"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nota 4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3erRegreso"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nota 5"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "5toRegreso"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

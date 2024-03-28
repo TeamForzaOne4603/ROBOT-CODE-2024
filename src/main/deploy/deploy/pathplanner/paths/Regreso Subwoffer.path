@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.358984999664025,
+        "y": 5.448775967973154
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.578523720427723,
+        "y": 5.419869994669567
+      },
+      "isLocked": false,
+      "linkedName": "Nota 2"
+    },
+    {
+      "anchor": {
+        "x": 1.3906348939458446,
+        "y": 5.593305834498993
+      },
+      "prevControl": {
+        "x": 2.1132842265684535,
+        "y": 5.564399861195406
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "pegadoSubwoofer"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": true,
+  "folder": "Paths4notasCentro",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

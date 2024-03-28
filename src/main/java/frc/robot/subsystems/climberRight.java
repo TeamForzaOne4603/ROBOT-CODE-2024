@@ -47,7 +47,7 @@ public class climberRight extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("posicion derecha", rightEncoder.getPosition());
+    SmartDashboard.putNumber("climber derecho", rightEncoder.getPosition());
   }
 
   public void goToPosition(double position){

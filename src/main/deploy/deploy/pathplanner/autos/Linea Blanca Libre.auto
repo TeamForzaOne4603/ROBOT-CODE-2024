@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": null,
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "InicioLibre"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LRegresoSubwoffer"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2daNotaL"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "L2doRegreso"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

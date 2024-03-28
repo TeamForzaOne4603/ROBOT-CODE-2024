@@ -8,15 +8,13 @@ import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
-import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 
 import frc.robot.Constants.MotorControllers;
@@ -37,6 +35,8 @@ public class drivetrain extends SubsystemBase {
   SparkPIDController rightController = rightLeader.getPIDController();
 
   DifferentialDrive drive = new DifferentialDrive(leftLeader, rightLeader);
+
+  DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(gyro.getYaw()), leftEncoder.getPosition(), rightEncoder.getPosition());
   
   public drivetrain() {
     leftLeader.setSmartCurrentLimit(40);
@@ -49,7 +49,6 @@ public class drivetrain extends SubsystemBase {
 
     leftLeader.setInverted(false);
     rightLeader.setInverted(true);
-
 
     leftLeader.setOpenLoopRampRate(.08); 
     leftFollower.setOpenLoopRampRate(.08);
@@ -64,8 +63,6 @@ public class drivetrain extends SubsystemBase {
 
     resetEncoders();
 
-    gyro.reset();
-
     leftController.setP(chassis.kP);
     leftController.setI(chassis.kI);
     leftController.setD(chassis.kD);
@@ -75,11 +72,6 @@ public class drivetrain extends SubsystemBase {
     rightController.setI(chassis.kI);
     rightController.setD(chassis.kD);
     rightController.setFF(chassis.kFF);
-
-    /*SmartDashboard.putNumber("kP chassis", chassis.kP);
-    SmartDashboard.putNumber("kFF chassis", chassis.kFF);
-    SmartDashboard.putNumber("kD chassis", chassis.kD);
-    SmartDashboard.putNumber("kI chassis", chassis.kI);*/
   }
 
   public void arcadeDrive(double speed, double rotation){
@@ -90,6 +82,9 @@ public class drivetrain extends SubsystemBase {
   public void periodic() {
   SmartDashboard.putNumber("llanta izquierda", leftEncoder.getPosition());
   SmartDashboard.putNumber("llanta derecha", rightEncoder.getPosition());
+  SmartDashboard.putNumber("angulo chassis", gyro.getYaw());
+
+  odometry.update(Rotation2d.fromDegrees(gyro.getYaw()), leftEncoder.getPosition(), rightEncoder.getPosition());
   }
 
   public void resetEncoders(){
@@ -97,5 +92,8 @@ public class drivetrain extends SubsystemBase {
     rightEncoder.setPosition(0);
   }
 
+  public void resetYaw(){
+    gyro.reset();
+  }
   
 }
