@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.6769507060140882,
+        "y": 7.342117219445707
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.5324208394895664,
+        "y": 6.272596207164246
+      },
+      "isLocked": false,
+      "linkedName": "PIDTunner inicio"
+    },
+    {
+      "anchor": {
+        "x": 1.4484468405556532,
+        "y": 5.463228954626923
+      },
+      "prevControl": {
+        "x": 2.3011730530503316,
+        "y": 5.434322981322019
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": true,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

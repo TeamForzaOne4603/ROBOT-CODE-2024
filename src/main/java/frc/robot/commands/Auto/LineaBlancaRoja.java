@@ -6,24 +6,27 @@ package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.take;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.taker;
 
-public class auto_front extends Command {
-  /** Creates a new auto. */
-  shooter shooter;
-  taker taker;
-  drivetrain drivetrain;
-  intake intake;
+public class LineaBlanca extends Command {
+  /** Creates a new LineaBlanca. */
   Timer timer = new Timer();
-  public auto_front(shooter shooter, taker taker, drivetrain drivetrain , intake intake) {
+  drivetrain drivetrain;
+  shooter shooter;
+  intake intake;
+  taker taker;
+
+  public LineaBlanca(drivetrain drivetrain, shooter shooter, intake intake, taker taker) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrain = drivetrain;
+    this.intake = intake;
     this.shooter = shooter;
     this.taker = taker;
-    this.intake = intake;
+
   }
 
   // Called when the command is initially scheduled.
@@ -36,41 +39,27 @@ public class auto_front extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get() < 4){
+    if(timer.get() < 1.8){
       shooter.shooterMove(.85);
     }
-    if(timer.get() > 2 & timer.get() < 4){
+    if(timer.get() > .9 & timer.get() < 1.8){
       taker.take(-.6);
     }
-    if(timer.get() > 5){
+    if(timer.get() > 2){
       shooter.shooterMove(0);
       taker.take(0);
     } 
-    while(timer.get() > 5 & timer.get() < 8){
-      drivetrain.arcadeDrive(.5, 0);
-      intake.goToPosition(219);
-      taker.take(.6);
+    while(timer.get() > 2 & timer.get() < 5){
+   drivetrain.arcadeDrive(.6, -0.14);
     }
-    while(timer.get() > 8.2 & timer.get() < 11.2){
-      drivetrain.arcadeDrive(-.5, 0);
-      intake.goToPosition(0);
-    }
-    if(timer.get() > 11.2 & timer.get() < 14){
-      shooter.shooterMove(.85);
-    }
-    if(timer.get() > 12 & timer.get() < 14){
-      taker.take(-.6);
+    while(timer.get() > 4 & timer.get() < 5.5){
+
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    shooter.shooterMove(0);
-      taker.take(0);
-      drivetrain.arcadeDrive(0, 0);
-      timer.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

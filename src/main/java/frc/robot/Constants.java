@@ -57,15 +57,27 @@ public final class Constants {
   }
 
   public static class chassis {
-    public static final double kP = 0;
-    public static final double kI = 0;
-    public static final double kD = 0;
-    public static final double kFF = 0;
+    public static final double kPA = 0;//3.2581;
+    public static final double kIA = 0;
+    public static final double kDA = 0;
+
+    public static final double kPG = 0;
+    public static final double kIG = 0;
+    public static final double kDG = 0;
+
     public static final double kGearRatio = 8.46;
     public static final double wheelDiameter = .1524;
+    public static final double kS = 0.057691;
+    public static final double kA = 1.0028;
+    public static final double kV = 2.2273;
 
+    public static final double kTrack = .55;
 
-    public static final double conversionFac = (1 / 8.45);
+    public static final double RamseteB = 2;
+
+    public static final double RamseteZ = .7;
+
+    public static final double conversionFac = (1 / 8.46) / .1524;
   }
   
 
